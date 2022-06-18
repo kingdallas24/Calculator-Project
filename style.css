@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calcBody {
+  background-color: black;
+  border-radius: 30px;
+  height: 800px;
+  width: 375px;
+  outline: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.display {
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  background-color: black;
+  color: white;
+  font-size: 5rem;
+  height: 33%;
+  width: 350px;
+  outline: 2px solid black;
+  margin: 10px;
+}
+
+.numDisplay {
+  margin-right: 10px;
+}
+
+.btnBody {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  outline: 2px solid black;
+  margin: 10px;
+}
+
+button {
+  margin: 5px;
+  font-size: 2.5rem;
+  font-family: Helvetica;
+  border-radius: 50%;
+  border: 2px solid black;
+  height: 75px;
+  width: 75px;
+}
+
+.zero {
+  width: 165px;
+  border-radius: 20px;
+  text-align: left;
+  padding-left: 25px;
+}
+
+.divide,
+.multiply,
+.subtract,
+.add,
+.equals {
+  background-color: orange;
+  color: white;
+}
+
+button:active {
+  background-color: white;
+  opacity: 0.6;
+}
+
+.clear,
+.positiveNegative,
+.percent {
+  background-color: darkgray;
+}
+
+.seven,
+.eight,
+.nine,
+.four,
+.five,
+.six,
+.one,
+.two,
+.three,
+.zero,
+.decimal {
+  background-color: #333733;
+  color: white;
+}
+
+hr {
+  background-color: #f2f7f3;
+  margin-top: 30px;
+  width: 125px;
+  height: 5px;
+  border-radius: 10px;
+}
+
+.addActive,
+.divideActive,
+.multiplyActive,
+.subtractActive {
+  background: white;
+  color: orange;
+}
