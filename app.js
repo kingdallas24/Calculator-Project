@@ -1,189 +1,99 @@
 let numDisplay = document.querySelector(".numDisplay");
-let zero = document.querySelector(".zero");
-let one = document.querySelector(".one");
-let two = document.querySelector(".two");
-let three = document.querySelector(".three");
-let four = document.querySelector(".four");
-let five = document.querySelector(".five");
-let six = document.querySelector(".six");
-let seven = document.querySelector(".seven");
-let eight = document.querySelector(".eight");
+let calcNum = document.querySelectorAll(".calcNum");
 let nine = document.querySelector(".nine");
 let clear = document.querySelector(".clear");
-let divide = document.querySelector(".divide");
-let add = document.querySelector(".add");
-let multiply = document.querySelector(".multiply");
-let subtract = document.querySelector(".subtract");
+let symbol = document.querySelectorAll(".operator");
 let equals = document.querySelector(".equals");
+let percent = document.querySelector(".percent");
 
-divide.addEventListener("click", (e) => {
-  divide.classList.add("divideActive");
-  add.classList.remove("addActive");
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  if (divide.classList.contains("divideActive") == true) {
-    numDisplay.textContent += "/";
+let value1;
+let value2;
+let operator;
+
+let symActive = false;
+
+const addNums = function (a, b) {
+  return a + b;
+};
+
+const subtractNums = function (a, b) {
+  return a - b;
+};
+const multiplyNums = function (a, b) {
+  return a * b;
+};
+
+const divideNums = function (a, b) {
+  return a / b;
+};
+
+function operate(val1, val2, operator) {
+  if (operator == "+") {
+    return addNums(val1, val2);
+  } else if (operator == "-") {
+    return subtractNums(val1, val2);
+  } else if (operator == "/") {
+    return divideNums(val1, val2);
+  } else if (operator == "*") {
+    return multiplyNums(val1, val2);
   }
-});
-add.addEventListener("click", (e) => {
-  divide.classList.add("divideActive");
+}
 
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.add("addActive");
-  if (add.classList.contains("addActive") == true) {
-    numDisplay.textContent += "+";
-    add.disabled = true;
-  }
+calcNum.forEach((num1) => {
+  num1.addEventListener("click", (e) => {
+    if (symActive == false) {
+      if (numDisplay.textContent == "0") numDisplay.textContent = "";
+      value1 = parseFloat((numDisplay.textContent += num1.textContent));
+    }
+  });
 });
 
-multiply.addEventListener("click", (e) => {
-  subtract.classList.remove("subtractActive");
-  divide.classList.remove("divideActive");
-  add.classList.remove("addActive");
-  multiply.classList.add("multiplyActive");
-  if (multiply.classList.contains("multiplyActive") == true) {
-    numDisplay.textContent += "*";
-  }
-});
+function stopEvent() {}
 
-subtract.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  divide.classList.remove("divideActive");
-  add.classList.remove("addActive");
-  subtract.classList.add("subtractActive");
-  if (subtract.classList.contains("subtractActive") == true) {
-    numDisplay.textContent += "-";
-  }
-});
-
-seven.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
+symbol.forEach((sym) => {
+  sym.addEventListener("click", (e) => {
+    symActive = true;
+    if (sym.textContent.includes("+")) {
+      sym.classList.add("addActive");
+      operator = "+";
+    } else if (sym.textContent.includes("-")) {
+      sym.classList.add("subtractActive");
+      operator = "-";
+    } else if (sym.textContent.includes("X")) {
+      sym.classList.add("multiplyActive");
+      operator = "*";
+    } else if (sym.textContent.includes("÷")) {
+      sym.classList.add("divideActive");
+      operator = "/";
+    }
     numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 7;
+  });
 });
 
-eight.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 8;
-});
-
-nine.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 9;
-});
-
-six.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 6;
-});
-
-five.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 5;
-});
-
-four.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  addActive = false;
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 4;
-});
-
-three.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 3;
-});
-
-two.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 2;
-});
-
-one.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 1;
-});
-
-zero.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  if (numDisplay.textContent == "0") {
-    numDisplay.textContent = "";
-  }
-  numDisplay.textContent += 0;
-});
-
-clear.addEventListener("click", (e) => {
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  numDisplay.textContent = "0";
+calcNum.forEach((num2) => {
+  num2.addEventListener("click", (e) => {
+    symbol.forEach((sym) => {
+      sym.classList.remove(
+        "multiplyActive",
+        "addActive",
+        "subtractActive",
+        "divideActive"
+      );
+    });
+    if (symActive == true) {
+      value2 = parseFloat((numDisplay.textContent += num2.textContent));
+    }
+  });
 });
 
 equals.addEventListener("click", (e) => {
-  add.disabled = false;
-  multiply.classList.remove("multiplyActive");
-  subtract.classList.remove("subtractActive");
-  add.classList.remove("addActive");
-  divide.classList.remove("divideActive");
-  numDisplay.textContent = eval(numDisplay.textContent);
+  symActive = false;
+  let finalResult = operate(value1, value2, operator);
+  numDisplay.textContent = finalResult;
+  value1 = finalResult;
+  console.log(finalResult);
 });
 
-// let add = function (firstNum, secondNum) {
-//   let total = firstNum + secondNum;
-//   return total;
-// };
+clear.addEventListener("click", (e) => {
+  numDisplay.textContent = "0";
+});
