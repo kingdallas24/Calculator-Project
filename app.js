@@ -5,6 +5,7 @@ let clear = document.querySelector(".clear");
 let symbol = document.querySelectorAll(".operator");
 let equals = document.querySelector(".equals");
 let percent = document.querySelector(".percent");
+let positiveNegative = document.querySelector(".positiveNegative");
 
 let value1;
 let value2;
@@ -96,4 +97,28 @@ equals.addEventListener("click", (e) => {
 
 clear.addEventListener("click", (e) => {
   numDisplay.textContent = "0";
+});
+
+percent.addEventListener("click", (e) => {
+  if (symActive == false) {
+    value1 = value1 / 100;
+    numDisplay.textContent = value1;
+    return value1;
+  } else if (symActive == true) {
+    value2 = value2 / 100;
+    numDisplay.textContent = value2;
+    return value2;
+  }
+});
+
+positiveNegative.addEventListener("click", (e) => {
+  if (symActive == false) {
+    value1 = "-" + value1;
+    numDisplay.textContent = value1;
+    return value1;
+  } else if (symActive == true) {
+    value2 = "-" + value2;
+    numDisplay.textContent = value2;
+    return value2;
+  }
 });
