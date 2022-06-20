@@ -45,9 +45,32 @@ function operate(val1, val2, operator) {
 calcNum.forEach((num1) => {
   num1.addEventListener("click", (e) => {
     if (symActive == false) {
-      if (numDisplay.textContent == "0") numDisplay.textContent = "";
+      if (numDisplay.textContent == "0") {
+        numDisplay.textContent = "";
+      }
 
-      value1 = parseFloat((numDisplay.textContent += num1.textContent));
+      value1 = parseFloat(
+        (numDisplay.textContent += num1.textContent).replace(/,/g, "")
+      );
+
+      let length = value1.toString().length;
+      console.log(length);
+
+      if (length >= 4) {
+        numDisplay.textContent = value1.toLocaleString("en", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+      }
+
+      if (length >= 8 && length <= 9) {
+        numDisplay.style.fontSize = "75%";
+      }
+      if (length === 9) {
+        calcNum.forEach((num1) => {
+          num1.disabled = true;
+        });
+      }
     }
   });
 });
@@ -87,25 +110,59 @@ calcNum.forEach((num2) => {
       );
     });
     if (symActive == true) {
-      value2 = parseFloat((numDisplay.textContent += num2.textContent));
+      numDisplay.style.fontSize = "75%";
+      value2 = parseFloat(
+        (numDisplay.textContent += num2.textContent).replace(/,/g, "")
+      );
+
+      let length = value2.toString().length;
+      console.log(length);
+
+      if (length >= 4) {
+        numDisplay.textContent = value2.toLocaleString("en", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+      }
+
+      if (length >= 8 && length <= 9) {
+        numDisplay.style.fontSize = "75%";
+      }
+      if (length === 9) {
+        calcNum.forEach((num2) => {
+          num2.disabled = true;
+        });
+      }
     }
   });
 });
 
 equals.addEventListener("click", (e) => {
+  numDisplay.style.fontSize = "75%";
   calcNum.forEach((num) => {
     num.disabled = true;
   });
 
   symActive = false;
   let finalResult = operate(value1, value2, operator);
+  if (finalResult.toString().length > 9) {
+    numDisplay.style.fontSize = "30%";
+    finalResult = finalResult.toExponential();
+  }
+
   numDisplay.textContent = finalResult;
+
+  numDisplay.textContent = finalResult.toLocaleString("en", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
   value1 = finalResult;
 
   console.log(finalResult);
 });
 
 clear.addEventListener("click", (e) => {
+  numDisplay.style.fontSize = "75%";
   calcNum.forEach((num) => {
     num.disabled = false;
   });
@@ -117,8 +174,15 @@ clear.addEventListener("click", (e) => {
       "divideActive"
     );
   });
-  decimal.disabled = false;
+  if (value1 == 0) {
+    decimal.disabled = true;
+  } else {
+    decimal.disabled = false;
+  }
+
   numDisplay.textContent = "0";
+  value1 = 0;
+  value2 = 0;
 });
 
 percent.addEventListener("click", (e) => {
