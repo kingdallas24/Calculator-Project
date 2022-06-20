@@ -5,6 +5,7 @@ let clear = document.querySelector(".clear");
 let symbol = document.querySelectorAll(".operator");
 let equals = document.querySelector(".equals");
 let percent = document.querySelector(".percent");
+let decimal = document.querySelector(".decimal");
 let positiveNegative = document.querySelector(".positiveNegative");
 
 let value1;
@@ -12,6 +13,7 @@ let value2;
 let operator;
 
 let symActive = false;
+let negativeActive = false;
 
 const addNums = function (a, b) {
   return a + b;
@@ -44,15 +46,18 @@ calcNum.forEach((num1) => {
   num1.addEventListener("click", (e) => {
     if (symActive == false) {
       if (numDisplay.textContent == "0") numDisplay.textContent = "";
+
       value1 = parseFloat((numDisplay.textContent += num1.textContent));
     }
   });
 });
 
-function stopEvent() {}
-
 symbol.forEach((sym) => {
   sym.addEventListener("click", (e) => {
+    decimal.disabled = false;
+    calcNum.forEach((num) => {
+      num.disabled = false;
+    });
     symActive = true;
     if (sym.textContent.includes("+")) {
       sym.classList.add("addActive");
@@ -88,14 +93,31 @@ calcNum.forEach((num2) => {
 });
 
 equals.addEventListener("click", (e) => {
+  calcNum.forEach((num) => {
+    num.disabled = true;
+  });
+
   symActive = false;
   let finalResult = operate(value1, value2, operator);
   numDisplay.textContent = finalResult;
   value1 = finalResult;
+
   console.log(finalResult);
 });
 
 clear.addEventListener("click", (e) => {
+  calcNum.forEach((num) => {
+    num.disabled = false;
+  });
+  symbol.forEach((sym) => {
+    sym.classList.remove(
+      "multiplyActive",
+      "addActive",
+      "subtractActive",
+      "divideActive"
+    );
+  });
+  decimal.disabled = false;
   numDisplay.textContent = "0";
 });
 
@@ -112,13 +134,42 @@ percent.addEventListener("click", (e) => {
 });
 
 positiveNegative.addEventListener("click", (e) => {
-  if (symActive == false) {
+  makeNegative();
+});
+
+function makeNegative() {
+  positiveNegative.classList.toggle("negative");
+
+  if (symActive == false && positiveNegative.className.includes("negative")) {
     value1 = "-" + value1;
     numDisplay.textContent = value1;
     return value1;
-  } else if (symActive == true) {
+  } else if (
+    symActive == false &&
+    !positiveNegative.className.includes("negative")
+  ) {
+    value1 = value1.replace("-", "");
+    numDisplay.textContent = value1;
+    return value1;
+  } else if (
+    symActive == true &&
+    positiveNegative.className.includes("negative")
+  ) {
     value2 = "-" + value2;
     numDisplay.textContent = value2;
     return value2;
+  } else if (
+    symActive == true &&
+    !positiveNegative.className.includes("negative")
+  ) {
+    value2 = value2.replace("-", "");
+    numDisplay.textContent = value2;
+    return value2;
   }
+}
+
+decimal.addEventListener("click", (e) => {
+  setTimeout(function () {
+    decimal.disabled = true;
+  }, 100);
 });
