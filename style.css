@@ -113,3 +113,13 @@ hr {
   background: white;
   color: orange;
 }
+
+.equation {
+  text-align: center;
+  border-radius: 20px;
+  font-size: 2rem;
+  width: 350px;
+  height: 100px;
+
+  color: white;
+}
