@@ -190,7 +190,7 @@ equals.addEventListener("click", (e) => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
-  equation.textContent += " " + "=" + " " + finalResult;
+  equation.textContent = finalResult;
 
   value1 = finalResult;
   if (finalResult == 0) console.log(finalResult);
@@ -208,7 +208,7 @@ clear.addEventListener("click", (e) => {
     num.disabled = false;
   });
   symbol.forEach((sym) => {
-    sym.disabled = true;
+    sym.disabled = false;
 
     sym.classList.remove(
       "multiplyActive",
